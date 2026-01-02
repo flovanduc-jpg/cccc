@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Discover Profile</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+}
+
+.container {
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+.card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.cover {
+    height: 140px;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+}
+
+.avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 5px solid white;
+    object-fit: cover;
+    margin: -55px auto 5px;
+    display: block;
+}
+
+/* 🎵 MUSIC BAR */
+.music {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 15px;
+}
+
+.music button {
+    border: none;
+    background: #ff4f7a;
+    color: white;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.music input {
+    flex: 1;
+}
+
+.content {
+    text-align: center;
+    padding: 10px 20px 20px;
+}
+
+.name {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.bio {
+    color: #666;
+    font-size: 14px;
+    margin: 8px 0;
+}
+
+.tags {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.tag {
+    background: #eee;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.follow {
+    background: #ff4f7a;
+    color: white;
+}
+
+.message {
+    background: #ddd;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="card">
+        <div class="cover"></div>
+
+        <img class="avatar" src="https://i.imgur.com/6VBx3io.png">
+
+        <!-- 🎵 Thanh nhạc -->
+        <div class="music">
+            <button onclick="toggleMusic()">▶️</button>
+            <input type="range" id="progress" value="0">
+        </div>
+
+        <div class="content">
+            <div class="name">Vă Đức</div>
+            <div class="bio">Lập trình | Game | Sáng tạo nội dung</div>
+
+            <div class="tags">
+                <div class="tag">🎮 Game</div>
+                <div class="tag">💻 HTML</div>
+                <div class="tag">👻 Horror</div>
+            </div>
+
+            <div class="buttons">
+                <button class="follow">Follow</button>
+                <button class="message">Message</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<audio id="audio" src="music.mp3"></audio>
+
+<script>
+const audio = document.getElementById("audio");
+const progress = document.getElementById("progress");
+const btn = document.querySelector(".music button");
+
+function toggleMusic() {
+    if (audio.paused) {
+        audio.play();
+        btn.innerText = "⏸";
+    } else {
+        audio.pause();
+        btn.innerText = "▶️";
+    }
+}
+
+audio.ontimeupdate = () => {
+    progress.max = audio.duration;
+    progress.value = audio.currentTime;
+};
+
+progress.oninput = () => {
+    audio.currentTime = progress.value;
+};
+</script>
+
+</body>
+</html>
